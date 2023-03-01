@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Template to set up IAM for Organisation
+Description: Template to set up IAM SSO for Organisation
 Resources:
   AuditorGroup:
     Type: AWS::IAM::Group
