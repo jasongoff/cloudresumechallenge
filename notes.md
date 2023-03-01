@@ -34,7 +34,7 @@ npx org-formation --help
 ```
 Generate an org-formation template
 ```
-npx org-formation init organization.yml --region us-east-1 
+npx org-formation init organization.yml --region us-east-1 --cross-account-role-name OrganizationFormationBuildAccessRole --print-stack --verbose
 ```
 This didn't work from corporate network as Node was failing to find local certificate, despite adding entry to the .npmrc file, so I bypassed Node cert checking
 ```
@@ -77,6 +77,9 @@ aws cloudformation delete-stack --stack-name cloud-resume-iam
 |{{compliance-root-email-address}}|Email address for the compliance account|jason+compliance@goff.me.uk|
 |{{orgbuild-root-email-address}}|Email address for the org build account|jason+orgbuild@goff.me.uk|
 
+## Onto Step 5 - executing org-formation
+
+Continue at step 5.2 [here](https://github.com/org-formation/org-formation-reference)
 
 
 

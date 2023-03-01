@@ -13,6 +13,6 @@ Organization:
   OrganizationRoot:
     Type: OC::ORG::OrganizationRoot
     Properties:
-      DefaultOrganizationAccessRoleName: OrganizationAccountAccessRole
+      DefaultOrganizationAccessRoleName: OrganizationFormationBuildAccessRole
 
 
