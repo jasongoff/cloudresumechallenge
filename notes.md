@@ -77,6 +77,10 @@ aws cloudformation delete-stack --stack-name cloud-resume-iam
 |{{compliance-root-email-address}}|Email address for the compliance account|jason+compliance@goff.me.uk|
 |{{orgbuild-root-email-address}}|Email address for the org build account|jason+orgbuild@goff.me.uk|
 
+Search and replace in the instructions isn't perfect.  Particularly emails did not get replaced correctly.
+
+I had to search for `email` in the code and replace with a relevant email address.
+
 ## Onto Step 5 - executing org-formation
 
 Continue at step 5.2 [here](https://github.com/org-formation/org-formation-reference)
