@@ -1,18 +1,83 @@
 AWSTemplateFormatVersion: '2010-09-09-OC'
-Description: default template generated for organization with master account 284148388796
+Description: Default organization blueprint
 
+# https://aws.amazon.com/blogs/mt/best-practices-for-organizational-units-with-aws-organizations/
 Organization:
+
   ManagementAccount:
     Type: OC::ORG::MasterAccount
     Properties:
+      RootEmail: jason@goff.me.uk
       AccountName: Jason DC Goff
       AccountId: '284148388796'
-      RootEmail: jason@goff.me.uk
       Alias: jasongoff
+      Tags:
+        budget-alarm-threshold: 50
+        budget-alarm-threshold-email-recipient: jason@goff.me.uk
 
   OrganizationRoot:
     Type: OC::ORG::OrganizationRoot
     Properties:
-      DefaultOrganizationAccessRoleName: OrganizationFormationBuildAccessRole
+      DefaultOrganizationAccessRoleName: OrganizationAccountAccessRole
+      DefaultBuildAccessRoleName: OrganizationFormationBuildAccessRole
 
+  # Organizational Unit used for Production workloads
+  ProdOu:
+    Type: OC::ORG::OrganizationalUnit
+    Properties:
+      OrganizationalUnitName: prod
+      Accounts: []
 
+  # Organizational Unit used for the Software Development Life Cycle of each team
+  SdlcOu:
+    Type: OC::ORG::OrganizationalUnit
+    Properties:
+      OrganizationalUnitName: sdlc
+      Accounts: []
+
+  # Organizational Unit used for shared infrastructure services
+  SharedOu:
+    Type: OC::ORG::OrganizationalUnit
+    Properties:
+      OrganizationalUnitName: shared
+      Accounts:
+        - !Ref OrgBuildAccount
+        - !Ref SecurityAccount
+        - !Ref LogArchiveAccount
+
+  # Organizational Unit that contains accounts to be deleted from organization
+  SuspendedOu:
+    Type: OC::ORG::OrganizationalUnit
+    Properties:
+      OrganizationalUnitName: suspended
+      Accounts: []
+
+  SecurityAccount:
+    Type: OC::ORG::Account
+    Properties:
+      Alias: 'jasongoff-security'
+      AccountName: Security Account
+      RootEmail: jason+security@goff.me.uk
+      Tags:
+        budget-alarm-threshold: 50
+        budget-alarm-threshold-email-recipient: jason+security@goff.me.uk
+
+  LogArchiveAccount:
+    Type: OC::ORG::Account
+    Properties:
+      Alias: 'jasongoff-log-archive'
+      AccountName: Log Archive Account
+      RootEmail: jason+logarchive@goff.me.uk
+      Tags:
+        budget-alarm-threshold: 50
+        budget-alarm-threshold-email-recipient: jason+logarchive@goff.me.uk
+
+  OrgBuildAccount:
+    Type: OC::ORG::Account
+    Properties:
+      Alias: 'jasongoff-org-build'
+      AccountName: Organization Build Account
+      RootEmail: jason+orgbuild@goff.me.uk
+      Tags:
+        budget-alarm-threshold: 50
+        budget-alarm-threshold-email-recipient: jason+orgbuild@goff.me.uk

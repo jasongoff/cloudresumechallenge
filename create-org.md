@@ -1,8 +1,3 @@
-# Notes
-Basic notes that I made whilst working through the fantastic [Cloud Resume Challenge](https://cloudresumechallenge.dev/docs/the-challenge/) by Forrest Brazeal.
-
-I started the challenge in March 2023 as a vehicle for focussing my Cloud learning.
-
 # Safety Net - Creating an AWS Organisation
 ## Root AWS Account
 I already had an AWS account secured with root and MFA, that I had used in the past in the *Original Way*, so I decided to use that as my Organisations Account and follow the *Professional Way*.
@@ -83,7 +78,50 @@ I had to search for `email` in the code and replace with a relevant email addres
 
 ## Onto Step 5 - executing org-formation
 
-Continue at step 5.2 [here](https://github.com/org-formation/org-formation-reference)
+Once the [organization.yml](org-formation/organization.yml) was done, I executed the org-formation command to apply it.
+```
+npx org-formation update src\organization.yml --verbose
+```
+Unfortunately this didn't work, and generated an error:
+```
+WARN: ======================================
+WARN: Hi there!
+WARN: You just ran into an error when assuming the role OrganizationFormationBuildAccessRole in account 284148388796.
+WARN: Possibly, this is due a breaking change in org-formation v0.9.15.
+WARN: From v0.9.15 onwards the org-formation cli will assume a role in every account it deploys tasks to.
+WARN: This will make permission management and SCPs to deny / allow org-formation tasks easier.
+WARN: More information: https://github.com/org-formation/org-formation-cli/tree/master/docs/0.9.15-permission-change.md
+WARN: Thanks!
+WARN: ======================================
+ERROR: error: AccessDenied, aws-request-id: 5ba51416-abf0-4b31-90cc-324280e18b86
+ERROR: User: arn:aws:iam::284148388796:user/jasongoff is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::284148388796:role/OrganizationFormationBuildAccessRole
+```
+Looking further at the instructions, step 3 seems to create this role, so I executed that (some of the filenames had changed so I updated the command accordingly.)
+```
+aws cloudformation create-stack --stack-name org-formation-role --template-body file://src/templates/000-org-build/role.yml --capabilities CAPABILITY_NAMED_IAM
+```
+That managed to create the role!  Now to try the org-formation command again.
+```
+npx org-formation update src\organization.yml --verbose
+```
+This time it worked!
+```
+DEBG: account with email jason@goff.me.uk was already part of the organization (accountId: 284148388796).
+OC::ORG::MasterAccount        | ManagementAccount             | Create (284148388796)
+DEBG: start executing task: CommitHash OC::ORG::MasterAccount ManagementAccount
+OC::ORG::MasterAccount        | ManagementAccount             | CommitHash
+DEBG: start executing task: Create OC::ORG::OrganizationRoot OrganizationRoot
+OC::ORG::OrganizationRoot     | OrganizationRoot              | Create (r-d229)
+DEBG: start executing task: CommitHash OC::ORG::OrganizationRoot OrganizationRoot
+OC::ORG::OrganizationRoot     | OrganizationRoot              | CommitHash
+INFO: done
+DEBG: putting object to S3:
+{
+  "Bucket": "organization-formation-state-284148388796-prd",
+  "Key": "{{state-object}}"
+}
+```
+
 
 
 
