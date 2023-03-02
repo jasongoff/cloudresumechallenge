@@ -19,6 +19,7 @@ I then created an environment variable to point to this profile by default, to a
 SET AWS_PROFILE=cloudresume
 ```
 
+---
 ## Setting up the AWS Organisation - org-formation
 I decided to forego my old habit of doing everything through the AWS Console, and try to learn Infrastructure-As-Code (IAC) as I went along.
 
@@ -51,9 +52,9 @@ Then I realised the guide didn't mean IAM groups, it meant SSO groups!
 ```
 aws cloudformation delete-stack --stack-name cloud-resume-iam
 ```
+ OK then.  Google-Fu drew a blank on how to create SSO Groups with CFTs, so back to the console for those.
 
- OK then.  Google-Fu drew a blank on how to create SSO Groups with CFTs, so back to the console for those.  
-
+---
 ## Information Gathered for step 4.
 
 |Parameter|Description|My Setting|
@@ -76,6 +77,7 @@ Search and replace in the instructions isn't perfect.  Particularly emails did n
 
 I had to search for `email` in the code and replace with a relevant email address.
 
+---
 ## Onto Step 5 - executing org-formation
 
 Once the [organization.yml](org-formation/organization.yml) was done, I executed the org-formation command to apply it.
@@ -104,7 +106,7 @@ That managed to create the role!  Now to try the org-formation command again.
 ```
 npx org-formation update src\organization.yml --verbose
 ```
-This time it worked!
+This time it worked, and I have a new org structure with AWS accounts created for the shared OU.
 ```
 DEBG: account with email jason@goff.me.uk was already part of the organization (accountId: 284148388796).
 OC::ORG::MasterAccount        | ManagementAccount             | Create (284148388796)
@@ -121,7 +123,29 @@ DEBG: putting object to S3:
   "Key": "{{state-object}}"
 }
 ```
+The `zip` command does not work on Windows, so had to use Winzip from Explorer.  I zipped up all the folders and then copied the zip file to the required folder.
 
+Then, I ran the deploy stacks step to set up the OrgBuild account build pipeline.
+```
+npx org-formation perform-tasks ./src/templates/000-org-build/_tasks.yml --organization-file ./src/organization.yml --max-concurrent-stacks 50 --max-concurrent-tasks 1 --print-stack --verbose
+```
+That ran to success.
+
+---
+## Step 6. Setting up the org-formation repo and Build pipeline
+First, I gathered the info needed to complete this step.
+
+|Parameter|Description|Example|
+|--|--|--|
+|SSO start URL|The landing page URL to be found in the AWS SSO of the management account|https://d-9067ada9ca.awsapps.com/start|
+|SSO region|The default region|us-east-1|
+|SSO account id|Select the OrgBuild account from the drop-down	|061050625979|
+|SSO role name|Select a role with write permission the drop-down|Administrator|
+|CLI default client Region|The default region|us-east-1|
+|CLI default output format|Whatever format you prefer|yaml|
+|CLI profile name|Name of the profile, choose wisely|jg-orgbuild-admin|
+
+Once I had the info, I followed [this guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html#sso-configure-profile-auto) to set up the CLI to use SSO.
 
 
 
