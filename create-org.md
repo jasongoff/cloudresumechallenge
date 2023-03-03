@@ -52,7 +52,7 @@ Then I realised the guide didn't mean IAM groups, it meant SSO groups!
 ```
 aws cloudformation delete-stack --stack-name cloud-resume-iam
 ```
- OK then.  Google-Fu drew a blank on how to create SSO Groups with CFTs, so back to the console for those.
+ OK then.  Google-Fu drew a blank on how to create SSO Groups and Users with CFTs, so back to the console for those.
 
 ---
 ## Information Gathered for step 4.
@@ -145,7 +145,28 @@ First, I gathered the info needed to complete this step.
 |CLI default output format|Whatever format you prefer|yaml|
 |CLI profile name|Name of the profile, choose wisely|jg-orgbuild-admin|
 
-Once I had the info, I followed [this guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html#sso-configure-profile-auto) to set up the CLI to use SSO.
+Once I had the info, I followed [this guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html#sso-configure-profile-auto) to set up the CLI to use SSO.  I then installed git-codecommit and cloned the repo from the orgbuild account.
+
+Example aws config for CLI SSO
+```
+[profile jasongoff-mgt]
+sso_start_url = https://example.awsapps.com/start#/
+sso_region = us-east-1
+sso_account_id = 1234567890
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+[profile jasongoff-log]
+sso_start_url = https://example.awsapps.com/start#/
+sso_region = us-east-1
+sso_account_id = 0987654321
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+```
+
+By setting e.g. `AWS_PROFILE=jasongoff_mgt` on the command line, any AWS CLI commands would use that profile to connect to a signed in SSO session.
 
 
 
