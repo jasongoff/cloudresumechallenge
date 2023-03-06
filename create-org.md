@@ -168,6 +168,9 @@ output = json
 
 By setting e.g. `AWS_PROFILE=jasongoff_mgt` on the command line, any AWS CLI commands would use that profile to connect to a signed in SSO session.
 
+I then created 2 new accounts (Dev and PROD) in Organization Console, as I got repeated errors trying to use org-formation build pipeline.
+
+
 
 
 
