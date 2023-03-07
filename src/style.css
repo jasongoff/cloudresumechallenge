@@ -1,18 +1,18 @@
 :root {
-  --header-back-color: #5F31AF;
-  --header-text-color: #D89F2C;
-  --body-back-color: #8E66D4;
-  --section-back-color: #F2EAD9;
-  --section-text-color: #2C2E0F;
-  --section-hover: #D2B479;
+  --header-back-color: #5f31af;
+  --header-text-color: #d89f2c;
+  --body-back-color: #8e66d4;
+  --section-back-color: #f2ead9;
+  --section-text-color: #2c2e0f;
+  --section-hover: #d2b479;
 }
 
 * {
-  max-width: 700px;
+  max-width: 800px;
   margin: auto;
 }
 
-#headerfooter {
+.headerfooter {
   background-color: var(--header-back-color);
   height: 45px;
   width: 100%;
@@ -20,14 +20,12 @@
 }
 
 .header {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 10 0 10;
   float: right;
 }
 
 .footer {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 10 0 10;
   padding-top: 12px;
   float: right;
 }
@@ -35,36 +33,30 @@
 h1,
 h2 {
   font-family: Quicksand, Roboto, Arial, Helvetica, sans-serif;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
+  padding: 0 5 5 5;
 }
 
 h3,
 h4,
 p {
   font-family: Roboto, Arial, Helvetica, sans-serif;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
+  padding: 0 5 5 5;
 }
 
 a {
   color: var(--header-text-color);
 }
 
-#container {
+.container {
   background-color: var(--body-back-color);
 }
 
-#spacer {
+.spacer {
   height: 10px;
 }
 
-#section {
-  margin-top: 10px;
-  margin-left: 15px;
-  margin-right: 15px;
+.section {
+  margin: 10 15 0 15;
   border-radius: 5px;
   background-color: var(--section-back-color);
   color: var(--section-text-color);
@@ -99,16 +91,13 @@ a {
   padding: 5 5 5 5;
 }
 
-/* .active, */
 .collapsible:hover {
   background-color: var(--section-hover);
 }
 
 .collapsible:after {
-  /* content: "\002B"; */
   content: "more...";
   color: var(--section-text-color);
-  /* font-weight: bold; */
   font-size: 14px;
   float: right;
   margin-right: 5px;
@@ -117,7 +106,6 @@ a {
 }
 
 .active:after {
-  /* content: "\2212"; */
   content: "less...";
 }
 
@@ -131,12 +119,11 @@ a {
 }
 
 .fullcontent {
-    padding: 0 18px;
-    transition: max-height 0.2s ease-out;
-    background-color: var(--section-back-color);
-    border-radius: 5px;
-  }
-  
+  padding: 0 18px;
+  transition: max-height 0.2s ease-out;
+  background-color: var(--section-back-color);
+  border-radius: 5px;
+}
 
 .row {
   display: flex;
