@@ -11,19 +11,76 @@
   </head>
   <body>
     <div id="container">
-      <div id="header">
+      <div id="headerfooter">
         <h1 class="header">Jason Goff</h1>
       </div>
       <div id="section">
-        <h2>Title</h2>
-        <p>Blurb</p>
+        <button class="collapsible">Summary</button>
+        <div class="content">
+          <p>
+            I am a highly skilled Lead Developer and Architect capable of
+            operating at all levels across the organisation. My key strength is
+            the ability to discuss requirements and ideas with business users
+            and envisage the technology solution to meet those demands. With
+            over 30 years experience in software development, the last 20 spent
+            in the Financial Services sector, I have experience of operating in
+            a wide range of businesses, from small software houses to large
+            global corporates. My core technology skills include AWS, Ab Initio,
+            C#, ASP.Net MVC, Java, SQL as well as a broad exposure to a host of
+            other technologies. I was instrumental in introducing Agile and
+            SCRUM in my last position, and successfully delivered 2 major
+            projects on time and on budget using iterative delivery methods,
+            continuous integration and continuous delivery pipelines to UAT. I
+            have a strong background in configuration management, software
+            development lifecycles, systems analysis and cybersecurity.
+          </p>
+        </div>
       </div>
       <div id="section">
-        <h2>Something</h2>
-        <p>Text</p>
+        <button class="collapsible">Software / Platform Knowledge</button>
+        <div class="content">
+          <div class="row">
+            <div class="column">
+                <h4>Ab Initio</h4>
+                <h4>Android SDK</h4>
+                <h4>AWS</h4>
+                <h4>C# ASP.Net MVC</h4>
+            </div>
+            <div class="column">
+                <h4>Git</h4>
+                <h4>Java</h4>
+                <h4>Javascript</h4>
+                <h4>KSH Scripting</h4>
+            </div>
+            <div class="column">
+                <h4>Linux</h4>
+                <h4>Python</h4>
+                <h4>React / Next.JS</h4>
+                <h4>SQL Server</h4>
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="footer"></div>
-      <div id="header"></div>
+      <div id="spacer"></div>
+      <div id="headerfooter">
+        <p class="footer">Cloud Resumé Challenge 2023&nbsp;&nbsp;|&nbsp;&nbsp;jason@goff.me.uk</p>
+      </div>
     </div>
+    <script>
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          }
+        });
+      }
+    </script>
   </body>
 </html>
