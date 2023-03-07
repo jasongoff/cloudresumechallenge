@@ -1,10 +1,10 @@
 :root {
-  --header-back-color: #9a2675;
-  --header-text-color: #bbcb53;
-  --body-back-color: #c73a9a;
-  --section-back-color: #eaeecf;
-  --section-text-color: #2c0f23;
-  --section-hover: #b7c848;
+  --header-back-color: #5F31AF;
+  --header-text-color: #D89F2C;
+  --body-back-color: #8E66D4;
+  --section-back-color: #F2EAD9;
+  --section-text-color: #2C2E0F;
+  --section-hover: #D2B479;
 }
 
 * {
