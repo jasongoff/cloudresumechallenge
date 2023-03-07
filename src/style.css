@@ -49,6 +49,10 @@ p{
   padding-bottom: 5px;
 }
 
+a {
+    color: var(--header-text-color);
+}
+
 #container {
   background-color: var(--body-back-color);
 }
