@@ -1,10 +1,10 @@
 :root {
-  --header-back-color: darkolivegreen;
-  --header-text-color: mistyrose;
-  --body-back-color: olive;
-  --section-back-color: mistyrose;
-  --section-text-color: darkolivegreen;
-  --section-hover: rosybrown;
+  --header-back-color: #9a2675;
+  --header-text-color: #bbcb53;
+  --body-back-color: #c73a9a;
+  --section-back-color: #eaeecf;
+  --section-text-color: #2c0f23;
+  --section-hover: #b7c848;
 }
 
 * {
@@ -42,7 +42,7 @@ h2 {
 
 h3,
 h4,
-p{
+p {
   font-family: Roboto, Arial, Helvetica, sans-serif;
   padding-left: 5px;
   padding-right: 5px;
@@ -50,7 +50,7 @@ p{
 }
 
 a {
-    color: var(--header-text-color);
+  color: var(--header-text-color);
 }
 
 #container {
@@ -85,7 +85,21 @@ a {
   padding: 5 5 5 5;
 }
 
-.active,
+.normalsection {
+  background-color: var(--section-back-color);
+  color: var(--section-text-color);
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  padding: 5 5 5 5;
+}
+
+/* .active, */
 .collapsible:hover {
   background-color: var(--section-hover);
 }
@@ -109,12 +123,20 @@ a {
 
 .content {
   padding: 0 18px;
-  max-height: 100px;
+  max-height: 0px;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: var(--section-back-color);
   border-radius: 5px;
 }
+
+.fullcontent {
+    padding: 0 18px;
+    transition: max-height 0.2s ease-out;
+    background-color: var(--section-back-color);
+    border-radius: 5px;
+  }
+  
 
 .row {
   display: flex;
