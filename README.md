@@ -8,4 +8,7 @@ Basic notes that I made whilst working through the fantastic [Cloud Resume Chall
 
 These are broken down into the logical parts that follow the challenge steps.
 
-[Creating the Organisation](create-org.md)
+
+- [Creating the Organisation](create-org.md)
+- [Certification Prep](certprep.md)
+- [Chunk 1 - The Front End](frontend.md)
