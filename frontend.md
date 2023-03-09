@@ -11,9 +11,15 @@ I created a new Route53 hosted zone `jasongoff.neptune19.com` following [this gu
 
 CloudFormation template: [cft/route53-hostedzone.yaml](cft/route53-hostedzone.yaml).
 
-The template was deployed via the AWS CLI:
+The template was validated and deployed via the AWS CLI:
 ```
+aws cloudformation validate-template --template-body file://route53-hostedzone.yaml
+
 aws cloudformation deploy --template-file route53-hostedzone.yaml --stack-name jasongoff-hosted-zone
+```
+and to remove it again...
+```
+aws cloudformation delete-stack --stack-name jasongoff-hosted-zone
 ```
 
 Once the hosted zone was setup, I then created the S3 bucket to serve the static website.  See [this article](https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html) for a guide.

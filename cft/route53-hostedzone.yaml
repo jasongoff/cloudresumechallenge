@@ -10,9 +10,7 @@ Resources:
     Properties:
       Name: !Ref DomainName
       HostedZoneConfig:
-        Comment: !Join
-          - " "
-          - ["My hosted zone for", !Ref DomainName]
+        Comment: !Join [' ',["My hosted zone for", !Ref DomainName]]
       HostedZoneTags:
         - Key: StackName
           Value: !Ref AWS::StackName
@@ -23,3 +21,5 @@ Outputs:
   HostedZoneID:
     Description: The ID of the Hosted Zone.
     Value: !Ref HostedZone
+  HostedZoneServers:
+    Value: !Join [',', !GetAtt HostedZone.NameServers]
