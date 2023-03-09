@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: A CloudFormation template to create a Route53 Hosted Zone
+Parameters:
+  DomainName:
+    Type: String
+    Default: jasongoff2.neptune19.com
+Resources:
+  HostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: !Ref DomainName
+      HostedZoneConfig:
+        Comment: !Join
+          - " "
+          - ["My hosted zone for", !Ref DomainName]
+      HostedZoneTags:
+        - Key: StackName
+          Value: !Ref AWS::StackName
+Outputs:
+  HostedZoneName:
+    Description: The fully-qualified domain name.
+    Value: !Ref DomainName
+  HostedZoneID:
+    Description: The ID of the Hosted Zone.
+    Value: !Ref HostedZone
