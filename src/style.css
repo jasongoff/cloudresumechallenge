@@ -1,10 +1,10 @@
 :root {
-  --header-back-color: #5f31af;
-  --header-text-color: #d89f2c;
-  --body-back-color: #8e66d4;
+  --header-back-color: #091034;
+  --header-text-color: #E4F132;
+  --body-back-color: #36448B;
   --section-back-color: #f2ead9;
-  --section-text-color: #2c2e0f;
-  --section-hover: #d2b479;
+  --section-text-color: #091034;
+  --section-hover: #DFE48F;
 }
 
 * {
@@ -134,13 +134,4 @@ a {
   padding: 5px;
 }
 
-@media only screen and (max-width: 430px) {
-  .left,
-  .right {
-    display: none;
-  }
-  .stuff {
-    width: 100%;
-    margin-left: 10px;
-  }
-}
+
