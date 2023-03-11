@@ -5,60 +5,21 @@ Parameters:
     Type: String
     Default: jasongoff.neptune19.com
 Resources:
-  StaticBucket:
-    Type: AWS::S3::Bucket
+  HostedZone:
+    Type: AWS::Route53::HostedZone
     Properties:
-      BucketName: !Ref DomainName
-      AccessControl: PublicRead
-      WebsiteConfiguration:
-        IndexDocument: resume.html
-  BucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      PolicyDocument:
-        Id: PublicPolicy
-        Version: 2012-10-17
-        Statement:
-          - Sid: PublicReadForGetBucketObjects
-            Effect: Allow
-            Principal: '*'
-            Action: 's3:GetObject'
-            Resource: !Join
-              - ''
-              - - 'arn:aws:s3:::'
-                - !Ref StaticBucket
-                - /*
-      Bucket: !Ref StaticBucket
+      Name: !Ref DomainName
+      HostedZoneConfig:
+        Comment: !Join [' ',["My hosted zone for", !Ref DomainName]]
+      HostedZoneTags:
+        - Key: StackName
+          Value: !Ref AWS::StackName
 Outputs:
-  WebsiteURL:
-    Value: !GetAtt
-      - StaticBucket
-      - WebsiteURL
-    Description: URL for website hosted on S3
-  S3BucketSecureURL:
-    Value: !Join
-      - ''
-      - - 'https://'
-        - !GetAtt
-          - StaticBucket
-          - DomainName
-    Description: Name of S3 bucket to hold website content
-
-#   HostedZone:
-#     Type: AWS::Route53::HostedZone
-#     Properties:
-#       Name: !Ref DomainName
-#       HostedZoneConfig:
-#         Comment: !Join [' ',["My hosted zone for", !Ref DomainName]]
-#       HostedZoneTags:
-#         - Key: StackName
-#           Value: !Ref AWS::StackName
-# Outputs:
-#   HostedZoneName:
-#     Description: The fully-qualified domain name.
-#     Value: !Ref DomainName
-#   HostedZoneID:
-#     Description: The ID of the Hosted Zone.
-#     Value: !Ref HostedZone
-#   HostedZoneServers:
-#     Value: !Join [',', !GetAtt HostedZone.NameServers]
+  HostedZoneName:
+    Description: The fully-qualified domain name.
+    Value: !Ref DomainName
+  HostedZoneID:
+    Description: The ID of the Hosted Zone.
+    Value: !Ref HostedZone
+  HostedZoneServers:
+    Value: !Join [',', !GetAtt HostedZone.NameServers]
