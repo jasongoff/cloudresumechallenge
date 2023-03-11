@@ -7,6 +7,10 @@ I already had a registered domain, Neptune19.com, set up in Route53, so I decide
 
 The idea here is to create a Route53 entry and a bucketname that are the same as each other, then by certain configuration outlined below, Route53 will route HTTP traffic to your bucket static site!
 
+I created an S3 bucket to serve the static website.  See [this article](https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html) for a guide.
+
+
+
 I created a new Route53 hosted zone `jasongoff.neptune19.com` following [this guide](https://aws.amazon.com/premiumsupport/knowledge-center/create-subdomain-route-53/).
 
 CloudFormation template: [cft/route53-hostedzone.yaml](cft/route53-hostedzone.yaml).
@@ -21,8 +25,6 @@ and to remove it again...
 ```
 aws cloudformation delete-stack --stack-name jasongoff-hosted-zone
 ```
-
-Once the hosted zone was setup, I then created the S3 bucket to serve the static website.  See [this article](https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html) for a guide.
 
 Finally, in my Route53 hosted zone I created A and CNAME records to point toward the S3 static website by setting them up as an Alias pointing to `s3-website-us-east-1.amazonaws.com`.
 
