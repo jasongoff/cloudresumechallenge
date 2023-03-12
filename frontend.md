@@ -23,7 +23,7 @@ aws cloudformation delete-stack --stack-name cloud-resume-bucket
 
 ---
 ## Step 5 - Securing with HTTPS and Amazon Cloudfront
-
+Following [this guide](https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/) I used option B first, then tried option C.  Both templates are in the [cft](cft/) folder.
 
 ---
 ## Step 6 - Setting up Amazon Route53 for custom DNS domain routing
