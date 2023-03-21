@@ -85,9 +85,3 @@ _Only if you have a subdomain:_
 I then checked the 4 nameservers set up in my subdomain hosted zone and added an NS record to my main domain entry (neptune19.com).  See [this guide](https://aws.amazon.com/premiumsupport/knowledge-center/create-subdomain-route-53/) for a refresher of what this means!
 
 Once complete, the [resumé was available](https://jasongoff.neptune19.com/).
-
-
-
-
-Page 72
-
