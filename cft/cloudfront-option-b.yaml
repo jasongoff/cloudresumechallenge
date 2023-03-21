@@ -15,7 +15,7 @@ Parameters:
 
   OAIEnabled:
     Type: String
-    Default: "no"
+    Default: "yes"
     AllowedValues: ["yes", "no"]
     Description: Enable OAI (Access to bucket only through CloudFront)
 
@@ -48,6 +48,8 @@ Resources:
       Comment: 'A simple CloudFront distribution with an S3 origin'
     Properties:
       DistributionConfig:
+        CNAMEs:
+          - jasongoff.neptune19.com
         Comment: 'A simple distribution with an S3 origin'
         DefaultCacheBehavior:
           AllowedMethods:
@@ -67,7 +69,7 @@ Resources:
           MaxTTL: 31536000
           MinTTL: 86400
           TargetOriginId: !Sub 's3-origin-${S3BucketName}'
-          ViewerProtocolPolicy: 'redirect-to-https'
+          ViewerProtocolPolicy: 'https-only'
         DefaultRootObject: !Ref DefaultRoot
         Enabled: true
         HttpVersion: 'http1.1'
@@ -77,6 +79,12 @@ Resources:
             Id: !Sub 's3-origin-${S3BucketName}'
             S3OriginConfig: {}
         PriceClass: 'PriceClass_All'
+        ViewerCertificate:
+          AcmCertificateArn: arn:aws:acm:us-east-1:273309134377:certificate/267a1f8e-d36a-40cf-9e52-07ef2d2a6901
+          CloudFrontDefaultCertificate: false
+          MinimumProtocolVersion: TLSv1
+          SslSupportMethod: sni-only
+          
 
 
   CfDistributionWithAOI:
@@ -86,6 +94,8 @@ Resources:
       Comment: 'A simple CloudFront distribution with an S3 origin'
     Properties:
       DistributionConfig:
+        CNAMEs:
+          - jasongoff.neptune19.com
         Comment: 'A simple distribution with an S3 origin'
         DefaultCacheBehavior:
           AllowedMethods:
@@ -105,7 +115,7 @@ Resources:
           MaxTTL: 31536000
           MinTTL: 86400
           TargetOriginId: !Sub 's3-origin-${S3BucketName}'
-          ViewerProtocolPolicy: 'redirect-to-https'
+          ViewerProtocolPolicy: 'https-only'
         DefaultRootObject: !Ref DefaultRoot
         Enabled: true
         HttpVersion: 'http1.1'
@@ -117,7 +127,12 @@ Resources:
             S3OriginConfig:
               OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CfOriginAccessIdentity}'
         PriceClass: 'PriceClass_All'
-
+        ViewerCertificate:
+          AcmCertificateArn: arn:aws:acm:us-east-1:273309134377:certificate/267a1f8e-d36a-40cf-9e52-07ef2d2a6901
+          CloudFrontDefaultCertificate: false
+          MinimumProtocolVersion: TLSv1
+          SslSupportMethod: sni-only
+          
   CfOriginAccessIdentity:
     Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
     Condition: WithOAIEnabled

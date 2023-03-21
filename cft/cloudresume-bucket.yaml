@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: A CloudFormation template to create a Route53 Hosted Zone
+Description: A CloudFormation template to create an S3 bucket for hosting a static website
 Parameters:
   DomainName:
     Type: String
