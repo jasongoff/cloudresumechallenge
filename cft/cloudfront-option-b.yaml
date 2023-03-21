@@ -69,7 +69,7 @@ Resources:
           MaxTTL: 31536000
           MinTTL: 86400
           TargetOriginId: !Sub 's3-origin-${S3BucketName}'
-          ViewerProtocolPolicy: 'https-only'
+          ViewerProtocolPolicy: 'redirect-to-https'
         DefaultRootObject: !Ref DefaultRoot
         Enabled: true
         HttpVersion: 'http1.1'
@@ -114,7 +114,7 @@ Resources:
           MaxTTL: 31536000
           MinTTL: 86400
           TargetOriginId: !Sub 's3-origin-${S3BucketName}'
-          ViewerProtocolPolicy: 'https-only'
+          ViewerProtocolPolicy: 'redirect-to-https'
         DefaultRootObject: !Ref DefaultRoot
         Enabled: true
         HttpVersion: 'http1.1'

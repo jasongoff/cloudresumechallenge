@@ -66,14 +66,7 @@ I then enhanced the template to add HTTPS/TLS encryption.  Under the Distributio
           MinimumProtocolVersion: TLSv1
           SslSupportMethod: sni-only          
 ```
-I also changed the ViewerProtocolPolicy to https-only.
-```
-        DefaultCacheBehavior:
-          ...
-          other settings
-          ...
-          ViewerProtocolPolicy: 'https-only'
-```
+
 The final template is in the [cft](cft/) folder.
 ```
 aws cloudformation validate-template --template-body file://cloudfront-option-b.yaml
