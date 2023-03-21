@@ -75,7 +75,15 @@ I also changed the ViewerProtocolPolicy to https-only.
           ViewerProtocolPolicy: 'https-only'
 ```
 The final template is in the [cft](cft/) folder.
+```
+aws cloudformation validate-template --template-body file://cloudfront-option-b.yaml
 
+aws cloudformation deploy --template-file cloudfront-option-b.yaml --stack-name jasongoff-neptune19-cloudfront
+```
+and to remove it again...
+```
+aws cloudformation delete-stack --stack-name jasongoff-neptune19-cloudfront
+```
 ---
 ## Step 6 - Setting up Amazon Route53 for custom DNS domain routing
 
