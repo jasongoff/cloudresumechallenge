@@ -81,7 +81,6 @@ Resources:
         PriceClass: 'PriceClass_All'
         ViewerCertificate:
           AcmCertificateArn: arn:aws:acm:us-east-1:273309134377:certificate/267a1f8e-d36a-40cf-9e52-07ef2d2a6901
-          CloudFrontDefaultCertificate: false
           MinimumProtocolVersion: TLSv1
           SslSupportMethod: sni-only
           
@@ -129,10 +128,9 @@ Resources:
         PriceClass: 'PriceClass_All'
         ViewerCertificate:
           AcmCertificateArn: arn:aws:acm:us-east-1:273309134377:certificate/267a1f8e-d36a-40cf-9e52-07ef2d2a6901
-          CloudFrontDefaultCertificate: false
           MinimumProtocolVersion: TLSv1
           SslSupportMethod: sni-only
-          
+
   CfOriginAccessIdentity:
     Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
     Condition: WithOAIEnabled
