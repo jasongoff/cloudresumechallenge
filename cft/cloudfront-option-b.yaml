@@ -49,7 +49,7 @@ Resources:
     Properties:
       DistributionConfig:
         CNAMEs:
-          - jasongoff.neptune19.com
+          - 'jasongoff.neptune19.com'
         Comment: 'A simple distribution with an S3 origin'
         DefaultCacheBehavior:
           AllowedMethods:
@@ -94,7 +94,7 @@ Resources:
     Properties:
       DistributionConfig:
         CNAMEs:
-          - jasongoff.neptune19.com
+          - 'jasongoff.neptune19.com'
         Comment: 'A simple distribution with an S3 origin'
         DefaultCacheBehavior:
           AllowedMethods:
