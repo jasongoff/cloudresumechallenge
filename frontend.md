@@ -87,7 +87,7 @@ aws cloudformation delete-stack --stack-name jasongoff-neptune19-cloudfront
 ---
 ## Step 6 - Setting up Amazon Route53 for custom DNS domain routing
 
-Finally, in my Route53 hosted zone I created A and CNAME records to point toward the Cloudfront distribution by setting them up as an Alias pointing to my CloudFront Distribution `https://d2nkm3yfbzeb17.cloudfront.net`.
+Finally, in my Route53 hosted zone I created A records to point toward the Cloudfront distribution by setting them up as an Alias pointing to my CloudFront Distribution `https://d2nkm3yfbzeb17.cloudfront.net`.  See [this guide](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html) for details.
 
 _Only if you have a subdomain:_
 I then checked the 4 nameservers set up in my subdomain hosted zone and added an NS record to my main domain entry (neptune19.com).  See [this guide](https://aws.amazon.com/premiumsupport/knowledge-center/create-subdomain-route-53/) for a refresher of what this means!
