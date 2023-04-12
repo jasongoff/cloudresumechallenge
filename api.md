@@ -16,9 +16,104 @@ Then, in Explore Items, I added an Item to the Table, and also added a new attri
 
 Page 83.
 
-## Step 9 - The Lambda API
+## Step 9 & 10 - The Lambda API and Python Code
+Using the console, I created a new function, `getHitCount`, with a basic Lambda role, `getHitCount-role-ljleqr4m`, automatically generated.  
 
-## Step 10 - The Python Code
+I started simply, ensuring I could pass in the name of a counter and get some return value back.
+```
+import logging
+
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+def lambda_handler(event, context):
+    counter_name = event['counter']
+    logger.info(f'{counter_name}')
+    return {
+        'statusCode': 200,
+        'value': 12345
+    }
+```
+Next, I extended the function to query DynamoDB to get the current value for my counter.
+```
+import logging
+import boto3
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+def lambda_handler(event, context):
+    name = event['counter']
+    logger.info(f'Called with counter={name}')
+    # query DynamoDB table hit-counters to return counter-value where counter-name = name
+    dynamodb = boto3.client('dynamodb')
+    response = dynamodb.get_item(
+        TableName='hit-counters',
+        Key={'counter-name': {'S': name}}
+    )
+
+    # Process the response
+    item = response['Item']
+    logger.info(f'Item: {item}')
+
+
+
+
+# Get the current count value
+# count = response['Item']['count']['N']
+
+    
+    return {
+        'statusCode': 200,
+        'value': 12345
+    }
+
+```
+For this to work, I had to create an IAM Policy that allowed read/write access to my DynamoDB table.  I could have assigned the managed Full Access policy, but I wanted to use least privilege.
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ReadWriteTable",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetItem",
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem"
+            ],
+            "Resource": "arn:aws:dynamodb:*:*:table/hit-counters"
+        },
+        {
+            "Sid": "GetStreamRecords",
+            "Effect": "Allow",
+            "Action": "dynamodb:GetRecords",
+            "Resource": "arn:aws:dynamodb:*:*:table/hit-counters/stream/* "
+        },
+        {
+            "Sid": "WriteLogStreamsAndGroups",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateLogGroup",
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "*"
+        }
+    ]
+}
+```
+I then assigned this policy to the IAM role created when I created the function (`getHitCount-role-ljleqr4m`).
 
 ## Step 13 - Source Control
 
