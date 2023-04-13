@@ -22,7 +22,7 @@ def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "value": value
+        "body": value
     }
 
 
@@ -48,15 +48,14 @@ def fetch_and_update_value(counter_name):
 
 
 def exception_handler(e):
-    error = str(e)
     logger.exception(e)
     status_code = 400
     return {
         'statusCode': status_code,
-        'body': json.dumps(error)
+        'body': "Unknown counter."
     }
 
 
 if __name__ == "__main__":
-    result = lambda_handler({'counter': 'cloud-resume'}, '')
+    result = lambda_handler({"body": json.dumps({"counter": "cloud-resume"})}, '')
     logger.info(f'{result}')
