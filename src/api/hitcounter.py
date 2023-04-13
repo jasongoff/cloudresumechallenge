@@ -1,7 +1,8 @@
-import logging
-import boto3
-import sys
 import json
+import logging
+import sys
+
+import boto3
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s: %(levelname)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', stream=sys.stdout)
 logger = logging.getLogger()
@@ -12,7 +13,7 @@ def lambda_handler(event, context):
     name = event['counter']
     logger.info(f'Called with counter={name}')
     try:
-        value = get_counter_value(name)
+        value = fetch_and_update_value(name)
     except Exception as e:
         return exception_handler(e)
 
@@ -22,16 +23,24 @@ def lambda_handler(event, context):
     }
 
 
-def get_counter_value(counter_name):
-    dynamodb = boto3.client('dynamodb')
-    response = dynamodb.get_item(
-        TableName='hit-counters',
-        Key={'counter-name': {'S': counter_name}}
+def fetch_and_update_value(counter_name):
+    table = boto3.resource('dynamodb').Table('hit-counters')
+    response = table.get_item(
+        Key={'counter-name': counter_name}
     )
     item = response['Item']
     logger.info(f'Item: {item}')
-    count = response['Item']['counter-value']['N']
-    logger.info(f'Counter value: {count}')
+    count = response['Item']['counter-value']
+    logger.info(f'Current counter value: {count}')
+    count += 1
+    response = table.update_item(
+        Key={'counter-name': counter_name},
+        UpdateExpression="set #countervalue = :v",
+        ExpressionAttributeNames={'#countervalue': 'counter-value'},
+        ExpressionAttributeValues={':v': count},
+        ReturnValues="UPDATED_NEW"
+    )
+    logger.info(f'Updated counter value: {count}. Update response: {response}')
     return count
 
 

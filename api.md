@@ -16,11 +16,11 @@ Then, in Explore Items, I added an Item to the Table, and also added a new attri
 
 Page 83.
 
-## Step 9 & 10 - The Lambda API and Python Code
+## Step 10 - The Lambda Function and Python Code for the API
 Using the console, I created a new function, `getHitCount`, with a basic Lambda role, `getHitCount-role-ljleqr4m`, automatically generated.  
 
 I started simply, ensuring I could pass in the name of a counter and get some return value back.
-```
+```python
 import logging
 
 
@@ -36,7 +36,7 @@ def lambda_handler(event, context):
     }
 ```
 Next, I extended the function to query DynamoDB to get the current value for my counter.
-```
+```python
 import logging
 import boto3
 
@@ -71,7 +71,7 @@ def lambda_handler(event, context):
 
 ```
 For this to work, I had to create an IAM Policy that allowed read/write access to my DynamoDB table.  I could have assigned the managed Full Access policy, but I wanted to use least privilege.
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -115,7 +115,13 @@ For this to work, I had to create an IAM Policy that allowed read/write access t
 ```
 I then assigned this policy to the IAM role created when I created the function (`getHitCount-role-ljleqr4m`).  The call to DynamoDB then worked as expected.
 
-Once working, I enhanced the script to increment the counter and write the new value to the DynamoDB table.  The final script is in [src\api\hitcounter.py](src\api\hitcounter.py).
+Once working, I enhanced the script to increment the counter and write the new value to the DynamoDB table.  The final script is in [src\api\hitcounter.py](src\api\hitcounter.py) and returns a JSON object similar to:
+```json
+{'statusCode': 200, 'value': Decimal('9')}
+```
+
+## Step 9 - Setting up the API using API Gateway
+Now that I had a working Lambda function that could return 
 
 ## Step 13 - Source Control
 

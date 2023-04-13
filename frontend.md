@@ -11,17 +11,17 @@ I created an S3 bucket to serve the static website.  See [this article](https://
 CloudFormation template: [cft/cloudresume-bucket.yaml](cft/cloudresume-bucket.yaml)
 
 The template was validated and deployed via the AWS CLI:
-```
+```shell
 aws cloudformation validate-template --template-body file://cloudresume-bucket.yaml
 
 aws cloudformation deploy --template-file cloudresume-bucket.yaml --stack-name jasongoff-neptune19-bucket
 ```
 and to remove it again...
-```
+```shell
 aws cloudformation delete-stack --stack-name jasongoff-neptune19-bucket
 ```
 If you want to check which stacks are currently deployed
-```
+```shell
 aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE
 ```
 Remove the filter to see all stacked, including deleted ones.
@@ -36,13 +36,13 @@ I created a new Route53 hosted zone for the subdomain `jasongoff.neptune19.com` 
 
 CloudFormation template: [cft/route53-hostedzone.yaml](cft/route53-hostedzone.yaml).
 
-```
+```shell
 aws cloudformation validate-template --template-body file://route53-hostedzone.yaml
 
 aws cloudformation deploy --template-file route53-hostedzone.yaml --stack-name jasongoff-neptune19-route53
 ```
 and to remove it again...
-```
+```shell
 aws cloudformation delete-stack --stack-name jasongoff-neptune19-route53
 ```
 
@@ -53,7 +53,7 @@ Firstly I had to obtain a certificate using Amazon Certificate Manager (ACM).  I
 Following [this guide](https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/) I used option B to create a Cloudfront distribution for my existing bucket. 
 
 I then enhanced the template to add HTTPS/TLS encryption.  Under the DistributionConfig, I added CNAMEs and Certificate info.
-```
+```yaml
       DistributionConfig:
         CNAMEs:
           - jasongoff.neptune19.com
@@ -68,13 +68,13 @@ I then enhanced the template to add HTTPS/TLS encryption.  Under the Distributio
 ```
 
 The final template is in the [cft](cft/) folder.
-```
+```shell
 aws cloudformation validate-template --template-body file://cloudfront-option-b.yaml
 
 aws cloudformation deploy --template-file cloudfront-option-b.yaml --stack-name jasongoff-neptune19-cloudfront
 ```
 and to remove it again...
-```
+```shell
 aws cloudformation delete-stack --stack-name jasongoff-neptune19-cloudfront
 ```
 ---
