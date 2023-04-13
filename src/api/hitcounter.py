@@ -10,7 +10,10 @@ logger.setLevel(logging.INFO)
 
 
 def lambda_handler(event, context):
-    name = event['counter']
+    logger.info(f'event: {event}')
+    body = json.loads(event['body'])
+    logger.info(f'body: {body}')
+    name = body['counter']
     logger.info(f'Called with counter={name}')
     try:
         value = fetch_and_update_value(name)

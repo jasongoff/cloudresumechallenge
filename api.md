@@ -123,6 +123,10 @@ Once working, I enhanced the script to increment the counter and write the new v
 ## Step 9 - Setting up the API using API Gateway
 Now that I had a working Lambda function that could return values from the DynamoDB table, it was time to set up the API Gateway.
 
+Using the AWS Console, I created an HTTP API called `cloud-resume-hit-count`, with a Lambda Integration pointing at the function created previously.
+This integration used a POST method.
+
+After some testing and lots of CloudWatch log examination, I concluded that the API Gateway was passing the request body of the POST to the lambda function as a string, so had to add some JSON library calls to unpack it.
 
 ## Step 13 - Source Control
 
