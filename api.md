@@ -1,6 +1,8 @@
 # Chunk 2: Building the API
 To start with, I created and tested the API in a Development account, separate from the Production account hosting the website created in Chunk 1.
 
+I followed the Goals outlined in the Guidebook (page 83 onwards), so the Step order is somewhat out of order here!
+
 ## Step 8 - The Database
 I started off creating the database via the console to understand exactly what I wanted.
 
@@ -10,11 +12,9 @@ I chose to customise settings and change read/write capacity to On-Demand, to be
 
 Then, in Explore Items, I added an Item to the Table, and also added a new attribute `counter-value`.  I then had a table:
 
-|counter-name|counter-value|
-|---|---|
-|cloud-resume|0|
-
-Page 83.
+| counter-name | counter-value |
+|--------------|---------------|
+| cloud-resume | 0             |
 
 ## Step 10 - The Lambda Function and Python Code for the API
 Using the console, I created a new function, `getHitCount`, with a basic Lambda role, `getHitCount-role-ljleqr4m`, automatically generated.  
@@ -127,6 +127,10 @@ Using the AWS Console, I created an HTTP API called `cloud-resume-hit-count`, wi
 This integration used a POST method.
 
 After some testing and lots of CloudWatch log examination, I concluded that the API Gateway was passing the request body of the POST to the lambda function as a string, so had to add some JSON library calls to unpack it.
+
+I also made a number of other changes to [src\api\hitcounter.py](src\api\hitcounter.py) to return better formatted JSON results.
+
+## Step 7 - calling the API from the Static Site
 
 ## Step 13 - Source Control
 
