@@ -130,7 +130,10 @@ After some testing and lots of CloudWatch log examination, I concluded that the 
 
 I also made a number of other changes to [src\api\hitcounter.py](src\api\hitcounter.py) to return better formatted JSON results.
 
+### HERE: PAGE 88 - do some Ultimate API Challenge tests
+
 ## Step 7 - calling the API from the Static Site
 
 ## Step 13 - Source Control
+Yeah, duh!  Did this as soon as I started.  Github repo is [here](https://github.com/jasongoff/cloudresumechallenge/tree/develop).
 
