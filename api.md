@@ -113,7 +113,9 @@ For this to work, I had to create an IAM Policy that allowed read/write access t
     ]
 }
 ```
-I then assigned this policy to the IAM role created when I created the function (`getHitCount-role-ljleqr4m`).
+I then assigned this policy to the IAM role created when I created the function (`getHitCount-role-ljleqr4m`).  The call to DynamoDB then worked as expected.
+
+Once working, I enhanced the script to increment the counter and write the new value to the DynamoDB table.  The final script is in [src\api\hitcounter.py](src\api\hitcounter.py).
 
 ## Step 13 - Source Control
 
