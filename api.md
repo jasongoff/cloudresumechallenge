@@ -117,7 +117,7 @@ I then assigned this policy to the IAM role created when I created the function 
 
 Once working, I enhanced the script to increment the counter and write the new value to the DynamoDB table.  The final script is in [src\api\hitcounter.py](src\api\hitcounter.py) and returns a JSON object similar to:
 ```json
-{'statusCode': 200, 'value': Decimal('9')}
+{"statusCode": 200, "value": 9}
 ```
 
 ## Step 9 - Setting up the API using API Gateway

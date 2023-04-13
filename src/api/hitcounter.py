@@ -18,8 +18,8 @@ def lambda_handler(event, context):
         return exception_handler(e)
 
     return {
-        'statusCode': 200,
-        'value': value
+        "statusCode": 200,
+        "value": value
     }
 
 
