@@ -41,7 +41,7 @@ def fetch_and_update_value(counter_name):
         ReturnValues="UPDATED_NEW"
     )
     logger.info(f'Updated counter value: {count}. Update response: {response}')
-    return count
+    return int(count)
 
 
 def exception_handler(e):

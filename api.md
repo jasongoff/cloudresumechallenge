@@ -121,7 +121,8 @@ Once working, I enhanced the script to increment the counter and write the new v
 ```
 
 ## Step 9 - Setting up the API using API Gateway
-Now that I had a working Lambda function that could return 
+Now that I had a working Lambda function that could return values from the DynamoDB table, it was time to set up the API Gateway.
+
 
 ## Step 13 - Source Control
 
