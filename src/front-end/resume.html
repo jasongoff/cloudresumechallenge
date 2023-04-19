@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Jason Goff</title>
@@ -7,7 +7,6 @@
             href="https://fonts.googleapis.com/css?family=Quicksand|Roboto"
             rel="stylesheet"
     />
-    <!-- <meta http-equiv="refresh" content="3" /> -->
 </head>
 <body>
 <div class="container">
@@ -258,20 +257,17 @@
     <div class="spacer"></div>
     <div class="headerfooter">
         <p class="footer">
-            <a href="https://cloudresumechallenge.dev/docs/the-challenge/aws/" target="_blank">Cloud Resumé Challenge
+            <span>Visitors: </span><span id="counter"></span>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://cloudresumechallenge.dev/docs/the-challenge/aws/" target="_blank">Cloud Resumé Challenge
                 2023</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;<a
-                href="mailto:jason@goff.me.uk"
-        >jason@goff.me.uk</a
-        >
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href="mailto:jason@goff.me.uk">jason@goff.me.uk</a>
         </p>
     </div>
 </div>
 <script>
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
+    const coll = document.getElementsByClassName("collapsible");
 
-    for (i = 0; i < coll.length; i++) {
+    for (let i = 0; i < coll.length; i++) {
         coll[i].addEventListener("click", function () {
             this.classList.toggle("active");
             var content = this.nextElementSibling;
@@ -283,7 +279,6 @@
         });
     }
 
-
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -293,15 +288,16 @@
 
     const requestOptions = {
         method: 'POST',
-        mode: 'no-cors',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
     };
 
-    fetch("https://b5a1xszn60.execute-api.us-east-1.amazonaws.com/getHitCount", requestOptions)
-        .then(response => console.log(response))
-        .then(result => console.log(result))
+    const span = document.getElementById('counter');
+
+    fetch("https://vverqscq65.execute-api.us-east-1.amazonaws.com/PROD", requestOptions)
+        .then(response => response.text())
+        .then(result => span.innerText = result)
         .catch(error => console.log('error', error));
 
 </script>
