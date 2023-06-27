@@ -14,5 +14,6 @@ These are broken down into the logical parts that follow the challenge steps.
 - [Chunk 1 - The Front End](frontend.md)
 - [Chunk 2 - Building the API](api.md)
 - [Chunk 3 - Front-End / Back-End Integration](integration.md)
+- [Chunk 4 - Automation and CI](automation.md)
 
 

@@ -30,7 +30,7 @@ This worked fantastically from Postman, however using from a browser resulted in
 To resolve this, I had to enable CORS on the [API](api.md).
 ## Step 11 - Smoke Testing with Cypress
 
-### PAGE 102
+### PAGE 102 - TODO at some point!
 
 ## Wrap Up
 So that's the Front end, API, database, Lambda function all working in AWS, 
